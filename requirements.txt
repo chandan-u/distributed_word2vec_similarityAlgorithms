@@ -1,0 +1,2 @@
+pyspark==2.1.0+hadoop2.7
+wheel==0.26.0
