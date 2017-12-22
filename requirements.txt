@@ -1,2 +1,2 @@
+py4j==0.10.4
 pyspark==2.1.0+hadoop2.7
-wheel==0.26.0
