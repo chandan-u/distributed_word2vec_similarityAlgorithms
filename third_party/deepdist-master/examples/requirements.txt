@@ -1,0 +1,6 @@
+# deepdist
+Cython
+flask
+gensim
+numpy
+# pyspark
