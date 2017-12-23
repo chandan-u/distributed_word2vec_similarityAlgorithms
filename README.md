@@ -14,7 +14,7 @@ There are many ways to measure similarity between words:
 
 ### Word2vec
 
-In this project I have decided to explore and use word2vec  to compute similarities between, words. The Idea behind word2vec is similar words have similar vectors in the high dimensional space.
+In this project I have decided to explore word2vec  to compute similarities between words. Implemented word2vec using Spark.Mllib package. The Idea behind word2vec is similar words have similar vectors in the high dimensional space.
 
 Example:
    Consider two sentences:    
@@ -43,6 +43,30 @@ There are two ways that I know of we can generate vectors using word2vec  :
 
 
 
+## Setup:
+
+please use pip to setup the env from requirements.txt files
+
+```
+pip install -r requirements.txt
+```
+
+
+Also to use deepdist please install the deepdist library from third_party folders:
+
+```
+python setup.py build
+python setup.py install
+```
+
+
+## Result:
+
+Please find the plotly visualiztion below. The model can also be visualized using the script: mllib_word2vec_visualization.ipynb in the repo. The model is generated using the spark.mllib.feature.word2vec implementation.
+
+https://plot.ly/create/?fid=chandan-u:5
+
+
 ## Using Single Instance vs Distributed:
 
 Stochastic Gradient Descent is a sequential process. Every gradient is dependent on the previous updates. Hence Single Instance can give good results as the Stochasitic Gradient Descent (SGD) will converge better, but the resources wont be sufficient for larger datasets. For very large corpus and vocabularies it's logical to use distributed computing. But with distributed computing if the communication between the subproblems ( i.e gradient on each partition of data) is not  optimal then it will result in poor convergence.
@@ -58,7 +82,11 @@ ref : http://ruder.io/optimizing-gradient-descent/index.html#downpoursgd
 
 Gensim can parallelize within a node. It runs on multiple cores. It uses C under the hood.
 
-
+```
+import gensim
+model = gensim.models.Word2Vec(sg=1, sentences= <list of tokenized sentences>, size=100, window=5, min_count= 1)
+w2v = dict(zip(model.wv.index2word, model.wv.syn0))
+```
 
 
 ## A distributed solution using Apache Spark Mlib
@@ -123,4 +151,4 @@ Even spark can be used to parallelize to run replicas of tensorflow models local
 
 ### How to tackle memory limits:
 
-Spark offers disk spillout but this will slow down the training.  Here is an interesting a paper I found, that speaks about using parametric servers for this problem (deepdist approach uses parametric server, but the implementation explained in this paper is quite different.)
+Spark offers disk spillout but this will slow down the training.  Here is an interesting a paper I found, that speaks about using parametric servers for this problem (deepdist approach uses parametric server, but the implementation explained in this paper is quite different. It uses column based rather than word based split). Yet to explore.
