@@ -45,7 +45,7 @@ plotly==2.2.3
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 py4j==0.10.4
-Pygments==2.2.0
+Pygments==2.7.4
 pyspark==2.1.0+hadoop2.7
 python-dateutil==2.6.1
 pytz==2017.3
